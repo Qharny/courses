@@ -3,9 +3,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 class SlidingPicturesPage extends StatelessWidget {
   final List<String> pictureUrls = [
-    'https://example.com/picture1.jpg',
-    'https://example.com/picture2.jpg',
-    'https://example.com/picture3.jpg',
+    'https://unsplash.com/photos/yellow-and-gray-robot-toy-1DjbGRDh7-E',
+    'https://unsplash.com/photos/black-flat-screen-computer-monitor-cYyqhdbJ9TI',
+    'https://unsplash.com/photos/macbook-pro-showing-programming-language-xrVDYZRGdw4',
   ];
 
   @override
