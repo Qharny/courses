@@ -1,7 +1,11 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
+
   @override
   HomeState createState() => HomeState();
 }
@@ -16,86 +20,65 @@ class HomeState extends State<Home> {
       body: Column(
         children: [
           Expanded(
-            child: Center(
-              child: Text(
-                'Your Content Goes Here',
-                style: TextStyle(fontSize: 20),
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.all(20),
-            height: screenWidth * 0.155,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.15),
-                  blurRadius: 30,
-                  offset: Offset(0, 10),
-                ),
-              ],
-              borderRadius: BorderRadius.circular(50),
-            ),
-            child: ListView.builder(
-              itemCount: 4,
-              scrollDirection: Axis.horizontal,
-              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.024),
-              itemBuilder: (context, index) => InkWell(
-                onTap: () {
-                  setState(() {
-                    currentIndex = index;
-                    HapticFeedback.lightImpact();
-                  });
-                },
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                child: Stack(
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(
-                      width: screenWidth * 0.2125,
-                      child: Center(
-                        child: AnimatedContainer(
-                          duration: Duration(seconds: 1),
-                          curve: Curves.fastLinearToSlowEaseIn,
-                          height:
-                              index == currentIndex ? screenWidth * 0.12 : 0,
-                          width:
-                              index == currentIndex ? screenWidth * 0.2125 : 0,
-                          decoration: BoxDecoration(
-                            color: index == currentIndex
-                                ? const Color(0xFF0C4EC1).withOpacity(0.2)
-                                : Colors.transparent,
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                        ),
+                    Text(
+                      "COURSES",
+                      style: TextStyle(
+                        color: Color(0xFF023F71),
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
-                    Container(
-                      width: screenWidth * 0.2125,
-                      alignment: Alignment.center,
-                      child: Icon(
-                        listOfIcons[index],
-                        size: screenWidth * 0.076,
-                        color: index == currentIndex
-                            ? Colors.blueAccent
-                            : Colors.black26,
-                      ),
+                    const Spacer(),
+                    IconButton(
+                      icon: Icon(Icons.more_vert, size: 35),
+                      onPressed: () {
+                        print("More Vert Pressed");
+                      },
                     ),
                   ],
-                ),
-              ),
+                )
+              ],
             ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: currentIndex,
+        onTap: (index) {
+          setState(() {
+            currentIndex = index;
+          });
+          handleBottomNavigationIconPressed(index);
+        },
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
           ),
         ],
       ),
     );
   }
 
-  List<IconData> listOfIcons = [
-    Icons.folder_rounded,
-    Icons.favorite_rounded,
-    Icons.format_align_left_outlined,
-    Icons.feedback_outlined,
-  ];
+  void handleBottomNavigationIconPressed(int index) {
+    // Add your logic for each bottom navigation icon press here
+    print('Bottom navigation icon at index $index is pressed');
+  }
 }
